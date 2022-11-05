@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap');
+@import './node_modules/bootstrap-icons/font/bootstrap-icons.css';
+@import './node_modules/boxicons/css/boxicons.min.css';
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-family-monospace: 'Raleway', sans-serif;
+
+$navbar-padding-y: 0;
+$navbar-padding-x: 1rem;
+
+$input-border-radius: 0.25rem;
+$input-focus-box-shadow: 0;
+
+$dropdown-min-width: 11.5rem;
+
+$success: #25e6a6;
+$primary: #727cf5;
+$dark: #313a46;
+$black-50: #3a4553;
+$dark-menu-item: #8391a2;
+$dark-menu-item-hover: #bccee4;
+$body-bg: #f0f3f8;
+
+// vector map
+$tooltip-bg-color: #3cc0ff;
+$tooltip-font-family: 'Raleway', sans-serif;
+
+$table-hover-bg: #f8f9fa;
+$table-cell-padding-y: 1rem;
+
+@import './node_modules/bootstrap/scss/bootstrap.scss';
+@import './node_modules/jsvectormap/src/scss/jsvectormap.scss';
+
+.scrollbar-track-y {
+	background: transparent !important;
+}
+.scrollbar-thumb-y {
+	background-color: #e0e1dd !important;
+	width: 6px !important;
+}
+
+.fs-14 {
+	font-size: 14px;
+}
+
+.fs-12 {
+	font-size: 12px;
+}
+
+.s-half {
+	color: #39b3da;
+}
+
+.bg-s-pale {
+	background-color: #cdebf3;
+}
+
+.bg-p-pale {
+	background-color: #dcdefc;
+}
+
+.loader {
+	box-sizing: border-box;
+	position: relative;
+	width: 48px;
+	height: 48px;
+	animation: spin 1s linear infinite;
+}
+.loader:after,
+.loader:before {
+	content: '';
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	border-radius: 50%;
+	background: $primary;
+	animation: spin 1s linear infinite;
+	transform-origin: 0px 100%;
+}
+.loader:before {
+	transform-origin: 0 50%;
+	background-color: $dark;
+}
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+nav {
+	.profile {
+		width: 32px;
+		height: 32px;
+		margin-right: 10px;
+		border-radius: 50%;
+		background-image: url('https://cdn-icons-png.flaticon.com/512/6016/6016872.png');
+		background-position: center;
+		background-size: cover;
+	}
+
+	.profile-name {
+		p {
+			color: $dark-menu-item;
+			&:first-child {
+				font-size: 16px;
+			}
+			&:last-child {
+				font-size: 12px;
+			}
+		}
+	}
+}
+
+//side bar
+#side-bar {
+	.side-wrapper {
+		height: 100vh;
+		background-color: $dark;
+		display: flex;
+		flex-direction: column;
+
+		.logo {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.dash-menu {
+			li {
+				list-style-type: none;
+				background-color: transparent;
+				border: none;
+
+				h4 {
+					color: $dark-menu-item;
+					font-size: 12px;
+				}
+
+				a {
+					text-decoration: none;
+					color: $dark-menu-item;
+					&:hover {
+						color: $dark-menu-item-hover;
+					}
+					&.active {
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
+}
+
+// column chart
+.apexcharts-text tspan {
+	fill: $secondary;
+}
+.apexcharts-tooltip span {
+	color: $secondary;
+	font-weight: normal;
+}
+
+// dashboard
+#dashboard {
+	height: 100%;
+	overflow-y: scroll;
+
+	.nav-link {
+		padding: 1rem;
+	}
+}
+
+//main body
+#main-body {
+	//for all drop-down
+	.dropdown {
+		cursor: pointer;
+	}
+	// for four card feature
+	.feature-btn {
+		position: absolute;
+		background-color: #dcdefc;
+		right: 20px;
+		top: 25px;
+	}
+
+	// line chart
+	#line-chart-wrapper {
+		.card-body {
+			position: relative;
+			.card-content {
+				width: 95%;
+				background-color: $body-bg;
+				margin: auto;
+
+				h2 {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					color: $secondary;
+				}
+				.bi-circle-fill {
+					font-size: 10px;
+					margin-right: 10px;
+				}
+			}
+			.card-item-overlay {
+				position: absolute;
+				left: 100px;
+				top: 160px;
+				z-index: 1;
+			}
+
+			#lineChart {
+				margin-top: 40px;
+			}
+		}
+	}
+
+	// map
+	#world-map-wrapper {
+		#map {
+			height: 250px;
+			path {
+				fill: #e9eef2;
+			}
+		}
+
+		#box-control {
+			.box {
+				margin-bottom: 1rem;
+
+				.straight-progress {
+					position: relative;
+					width: 240px;
+					height: 5px;
+					background-color: #e9eef2;
+					border-radius: 1rem;
+					overflow: hidden;
+
+					.highlight {
+						position: absolute;
+						top: 0;
+						left: 0;
+						height: 100%;
+						background-color: $primary;
+						&.one {
+							width: 59%;
+						}
+						&.two {
+							width: 25%;
+						}
+						&.three {
+							width: 45%;
+						}
+						&.four {
+							width: 55%;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	//data table
+	#table-wrapper {
+		#table {
+			color: $black-50;
+			font-weight: thin;
+
+			td {
+				font-size: 15px;
+				span {
+					font-size: 14px;
+					color: $secondary;
+				}
+			}
+		}
+	}
+
+	// donut
+	#donut-wrapper {
+		#donutChart {
+			.apexcharts-tooltip {
+				border-radius: 4px;
+				border: 2px solid #fff;
+			}
+			.apexcharts-tooltip span {
+				color: #fff;
+			}
+		}
+		.data-control {
+			.donut-data {
+				color: $black-50;
+				font-size: 15px;
+				border-bottom: 1px solid #f8f9fa;
+				padding: 10px 0;
+				.crack {
+					width: 12px;
+					height: 12px;
+				}
+				.coloring-1 {
+					background-color: rgb(255, 69, 96);
+				}
+				.coloring-2 {
+					background-color: rgb(0, 143, 251);
+				}
+				.coloring-3 {
+					background-color: rgb(0, 227, 150);
+				}
+				.coloring-4 {
+					background-color: rgb(254, 176, 25);
+				}
+			}
+		}
+	}
+
+	// recent activity
+	#activity-item-wrapper {
+		.activity-list-control {
+			height: 400px;
+			.item {
+				position: relative;
+				height: fit-content;
+				padding-bottom: 1rem;
+
+				span {
+					position: absolute;
+					width: 2px;
+					height: 100%;
+					background-color: #eef7fd;
+					left: 20px;
+					z-index: 10;
+				}
+				.item-react {
+					width: 22px;
+					height: 22px;
+					line-height: 22px;
+					border-radius: 50%;
+					z-index: 20;
+				}
+			}
+		}
+	}
+}
+
+// media query
+@include media-breakpoint-down(md) {
+	#side-bar {
+		position: fixed;
+		top: 0;
+		transform: translateX(-100%);
+		background-color: #313a4640;
+		z-index: 100;
+
+		.side-wrapper {
+			width: 75%;
+			z-index: 200;
+		}
+	}
+
+	#side-bar.show {
+		transform: translateX(0);
+	}
+
+	#dashboard {
+		.nav-link {
+			padding: 0.8rem;
+		}
+	}
+
+	.navbar-nav {
+		.dropdown-menu {
+			position: absolute;
+			top: 70px;
+		}
+	}
+}
