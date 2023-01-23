@@ -1,25 +1,27 @@
 import './style.scss';
 import 'animate.css';
 import * as bootstrap from 'bootstrap';
-import ApexCharts from "apexcharts";
+import ApexCharts from 'apexcharts';
 import jsVectorMap from 'jsvectormap';
 import 'jsvectormap/dist/maps/world.js';
 import Scrollbar from 'smooth-scrollbar';
-import {showLoader, removeLoader} from "./js/loader";
+import { showLoader, removeLoader } from './js/loader';
+import { load, timing } from './js/function';
+
+load(showLoader());
+timing(removeLoader());
 
 //scrollbar init
-Scrollbar.init(document.querySelector('#content-scroll'));
-Scrollbar.init(document.querySelector('#dashboard'));
+Scrollbar.init(document.querySelector('.dash-menu'));
 Scrollbar.init(document.querySelector('.activity-list-control'));
+Scrollbar.init(document.querySelector('.noti-lists'));
 
-// show hide loading Ui
-window.addEventListener('load', () => {
-	showLoader();
+//dropdown menu
+let toggler = document.querySelector('.dropdown-toggle');
+let menu = document.querySelector('.dropdown-menu');
+toggler.addEventListener('click', () => {
+	menu.classList.toggle('slide');
 });
-
-setTimeout(() => {
-	removeLoader();
-}, 1000);
 
 // burger menu customize
 let burger = document.querySelector('.burger');
@@ -33,6 +35,82 @@ document.addEventListener('click', (e) => {
 		sideBar.classList.remove('show');
 	}
 });
+
+//full screen
+const fullscreenIcon = document.querySelector('.bx-fullscreen');
+const exitscreenIcon = document.querySelector('.bx-exit-fullscreen');
+
+const elem = document.documentElement;
+const screenTag = document.querySelector('.fullscreen');
+let isFullscreen = false;
+
+const swapFull = () => {
+	fullscreenIcon.style.display = 'none';
+	exitscreenIcon.style.display = 'block';
+};
+
+const swapExit = () => {
+	exitscreenIcon.style.display = 'none';
+	fullscreenIcon.style.display = 'block';
+};
+swapExit();
+
+screenTag.addEventListener('click', () => {
+	if (!isFullscreen) {
+		setFullscreen();
+		swapFull();
+		return (isFullscreen = true);
+	} else {
+		exitFullscreen();
+		swapExit();
+		return (isFullscreen = false);
+	}
+});
+
+function setFullscreen() {
+	if (elem.requestFullscreen) {
+		/* View in fullscreen */
+		elem.requestFullscreen();
+	} else if (elem.webkitRequestFullscreen) {
+		/* Safari */
+		elem.webkitRequestFullscreen();
+	} else if (elem.msRequestFullscreen) {
+		/* IE11 */
+		elem.msRequestFullscreen();
+	}
+}
+
+function exitFullscreen() {
+	if (document.exitFullscreen) {
+		document.exitFullscreen();
+	} else if (document.webkitExitFullscreen) {
+		/* Safari */
+		document.webkitExitFullscreen();
+	} else if (document.msExitFullscreen) {
+		/* IE11 */
+		document.msExitFullscreen();
+	}
+}
+
+//adjust left side bar
+const sideSwitch = document.querySelector('.slidebar-burger');
+let dashMenu = document.querySelector('.dash-menu');
+let mainSide = document.querySelector('#main-side');
+
+sideSwitch.addEventListener('click', () => {
+	sideBar.classList.toggle('close');
+	mainSide.classList.toggle('close');
+
+	if (sideBar.classList.contains('close')) {
+		sideBar.style.height = mainSide.scrollHeight + 'px';
+	} else {
+		sideBar.style.height = '100%';
+	}
+});
+
+//toggle theme
+const toggleTheme = document.querySelector('.toggle-theme');
+toggleTheme.addEventListener('click', () => {});
 
 // column chart
 let column = {
@@ -76,20 +154,7 @@ let column = {
 		colors: ['transparent'],
 	},
 	xaxis: {
-		categories: [
-			'Jan',
-			'Feb',
-			'Mar',
-			'Apr',
-			'May',
-			'Jun',
-			'Jul',
-			'Aug',
-			'Sep',
-			'Oct',
-			'Nov',
-			'Dev',
-		],
+		categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dev'],
 		labels: {
 			style: {
 				fontFamily: 'Raleway',
@@ -281,5 +346,5 @@ let donut = {
 		},
 	],
 };
-let donutChart  = new ApexCharts(document.querySelector('#donutChart'), donut);
+let donutChart = new ApexCharts(document.querySelector('#donutChart'), donut);
 donutChart.render();
